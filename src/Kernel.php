@@ -2,7 +2,9 @@
 
 namespace App;
 
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Component\Config\Exception\LoaderLoadException;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -44,18 +46,27 @@ class Kernel extends BaseKernel
         $container->setParameter('container.dumper.inline_class_loader', true);
         $confDir = $this->getProjectDir().'/config';
 
-        $loader->load($confDir.'/{packages}/*'.self::CONFIG_EXTS, 'glob');
-        $loader->load($confDir.'/{packages}/'.$this->environment.'/*'.self::CONFIG_EXTS, 'glob');
-        $loader->load($confDir.'/{services}'.self::CONFIG_EXTS, 'glob');
-        $loader->load($confDir.'/{services}_'.$this->environment.self::CONFIG_EXTS, 'glob');
+        try {
+            $loader->load($confDir.'/{packages}/*'.self::CONFIG_EXTS, 'glob');
+            $loader->load($confDir.'/{packages}/'.$this->environment.'/*'.self::CONFIG_EXTS, 'glob');
+            $loader->load($confDir.'/{services}'.self::CONFIG_EXTS, 'glob');
+            $loader->load($confDir.'/{services}_'.$this->environment.self::CONFIG_EXTS, 'glob');
+        } catch (Exception $e) {
+            die('Erreur dans le kernel ! $loader->load() - ' . $e->getCode() . ' - ' . $e->getMessage());
+        }
     }
 
     protected function configureRoutes(RouteCollectionBuilder $routes)
     {
         $confDir = $this->getProjectDir().'/config';
 
-        $routes->import($confDir.'/{routes}/'.$this->environment.'/*'.self::CONFIG_EXTS, '/', 'glob');
-        $routes->import($confDir.'/{routes}/*'.self::CONFIG_EXTS, '/', 'glob');
-        $routes->import($confDir.'/{routes}'.self::CONFIG_EXTS, '/', 'glob');
+        try {
+            $routes->import($confDir . '/{routes}/' . $this->environment . '/*' . self::CONFIG_EXTS, '/', 'glob');
+
+            $routes->import($confDir.'/{routes}/*'.self::CONFIG_EXTS, '/', 'glob');
+            $routes->import($confDir.'/{routes}'.self::CONFIG_EXTS, '/', 'glob');
+        } catch (LoaderLoadException $e) {
+            die('Erreur dans le kernel ! $routes->import() - ' . $e->getCode() . ' - ' . $e->getMessage());
+        }
     }
 }

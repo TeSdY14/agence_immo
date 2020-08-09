@@ -4,7 +4,9 @@ namespace App\Entity;
 
 use App\Repository\PropertyRepository;
 use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Cocur\Slugify\Slugify;
 
 /**
  * @ORM\Entity(repositoryClass=PropertyRepository::class)
@@ -13,7 +15,7 @@ class Property
 {
 
     const HEAT = [
-        0 => 'Electric',
+        0 => 'Électrique',
         1 => 'Gaz'
     ];
 
@@ -77,7 +79,7 @@ class Property
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $postal_code;
+    private $postalCode;
 
     /**
      * @ORM\Column(type="boolean", options={"default": false})
@@ -87,11 +89,11 @@ class Property
     /**
      * @ORM\Column(type="datetime")
      */
-    private $created_at;
+    private $createdAt;
 
     public function __construct()
     {
-        $this->created_at = new DateTime();
+        $this->createdAt = new DateTime();
     }
 
     /**
@@ -119,6 +121,10 @@ class Property
         $this->title = $title;
 
         return $this;
+    }
+
+    public function getSlugTitle() {
+        return (new Slugify())->slugify($this->title);
     }
 
     /**
@@ -200,6 +206,14 @@ class Property
         return $this;
     }
 
+    /**
+     * @return string
+     * Récupère la valeur formatée du prix
+     */
+    public function getFormattedPrice() {
+        return number_format($this->price, 0, '', ' ') . ' €';
+    }
+
     public function getHeat(): ?int
     {
         return $this->heat;
@@ -210,6 +224,14 @@ class Property
         $this->heat = $heat;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     * Récupère la valeur String de chauffage via la constante HEAT
+     */
+    public function getHeatType() {
+        return self::HEAT[$this->heat];
     }
 
     public function getCity(): ?string
@@ -238,12 +260,12 @@ class Property
 
     public function getPostalCode(): ?string
     {
-        return $this->postal_code;
+        return $this->postalCode;
     }
 
-    public function setPostalCode(string $postal_code): self
+    public function setPostalCode(string $postalCode): self
     {
-        $this->postal_code = $postal_code;
+        $this->postalCode = $postalCode;
 
         return $this;
     }
@@ -260,14 +282,14 @@ class Property
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
