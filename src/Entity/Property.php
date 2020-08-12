@@ -15,8 +15,14 @@ class Property
 {
 
     const HEAT = [
-        0 => 'Électrique',
-        1 => 'Gaz'
+        0 => 'Electric',
+        1 => 'Gas'
+    ];
+
+    const STATUS = [
+        0 => 'For Sale',
+        1 => 'For Rent',
+        2 => 'Not Available'
     ];
 
     /**
@@ -85,6 +91,11 @@ class Property
      * @ORM\Column(type="boolean", options={"default": false})
      */
     private $sold = false;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $status;
 
     /**
      * @ORM\Column(type="datetime")
@@ -292,5 +303,21 @@ class Property
         $this->createdAt = $createdAt;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param mixed $status
+     */
+    public function setStatus($status): void
+    {
+        $this->status = $status;
     }
 }

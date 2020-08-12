@@ -26,6 +26,7 @@
         "symfony/twig-bundle": "*",
         "symfony/validator": "*",
         "symfony/web-link": "*",
+        "symfony/web-profiler-bundle": "4.4.*",
         "symfony/yaml": "*"
     },
     "require-dev": {
