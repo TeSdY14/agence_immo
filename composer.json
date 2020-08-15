@@ -8,6 +8,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "cocur/slugify": "^4.0",
+        "doctrine/annotations": "^1.10",
         "sensio/framework-extra-bundle": "^5.5",
         "symfony/asset": "*",
         "symfony/console": "*",
@@ -24,12 +25,13 @@
         "symfony/swiftmailer-bundle": "^3.1",
         "symfony/translation": "*",
         "symfony/twig-bundle": "*",
-        "symfony/validator": "*",
+        "symfony/validator": "4.4.*",
         "symfony/web-link": "*",
         "symfony/web-profiler-bundle": "4.4.*",
         "symfony/yaml": "*"
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.3",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.0",
         "symfony/profiler-pack": "*",

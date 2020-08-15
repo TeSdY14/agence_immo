@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/property")
+ * @Route("/admin")
  * Class AdminPropertyController
  * @package App\Controller\Admin
  */
@@ -23,10 +23,13 @@ class AdminPropertyController extends AbstractController
      * @var PropertyRepository
      */
     private $propertyRepo;
+
     /**
      * @var EntityManagerInterface
      */
     private $em;
+
+    const CURRENT_MENU = 'admin';
 
 
     public function __construct(PropertyRepository $propertyRepository, EntityManagerInterface $em)
@@ -43,11 +46,14 @@ class AdminPropertyController extends AbstractController
     {
         $properties = $this->propertyRepo->findAll();
 
-        return $this->render('admin/property/index.html.twig', compact('properties'));
+        return $this->render('admin/property/index.html.twig', [
+            'current_menu' => self::CURRENT_MENU,
+            'properties' => $properties
+        ]);
     }
 
     /**
-     * @Route("/new", name="admin.property.new")
+     * @Route("/property/new", name="admin.property.new")
      * @param Request $request
      * @return RedirectResponse|Response
      */
@@ -65,6 +71,7 @@ class AdminPropertyController extends AbstractController
         }
 
         return $this->render('admin/property/new.html.twig', [
+            'current_menu' => self::CURRENT_MENU,
             'property' => $property,
             'propertyForm' => $propertyForm->createView()
         ]);
@@ -72,7 +79,7 @@ class AdminPropertyController extends AbstractController
 
 
     /**
-     * @Route("/{id}", name="admin.property.edit", methods="GET|POST")
+     * @Route("/property/{id}", name="admin.property.edit", methods="GET|POST")
      * @param Property $property
      * @param Request $request
      * @return Response
@@ -89,6 +96,7 @@ class AdminPropertyController extends AbstractController
         }
 
         return $this->render('admin/property/edit.html.twig', [
+            'current_menu' => self::CURRENT_MENU,
             'property' => $property,
             'propertyForm' => $propertyForm->createView()
         ]);
@@ -96,7 +104,7 @@ class AdminPropertyController extends AbstractController
 
 
     /**
-     * @Route("/{id}", name="admin.property.delete", methods="DELETE")
+     * @Route("/property/{id}", name="admin.property.delete", methods="DELETE")
      * @param Property $property
      * @param Request $request
      * @return RedirectResponse|Response

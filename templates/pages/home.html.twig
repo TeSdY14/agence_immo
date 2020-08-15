@@ -8,28 +8,29 @@
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab beatae corporis deleniti eligendi explicabo illum, minus nam nemo nisi nostrum numquam quos, recusandae, repellendus repudiandae sapiente tenetur vel veritatis voluptas.
         </p>
     </div>
-
+    
     <div class="container">
-
+        
         <h2>Les dernières annonces</h2>
-        {% for property in properties %}
-            <div class="col-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <a href="{{ path('property.show', {id: property.id, slug: property.slugTitle}) }}">{{ property.title }}</a>
-                        </h5>
-                        <p class="card-text">
-                            {{ property.city }} ({{ property.postalCode }})
-                        </p>
-                        <p class="text-primary font-weight-bold h4">
-                            {{ property.formattedPrice }}
-                        </p>
+        <div class="row">
+            {% for property in properties %}
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{{ path('property.show', {id: property.id, slug: property.slugTitle}) }}">{{ property.title }}</a>
+                            </h5>
+                            <p class="card-text">
+                                {{ property.city }} ({{ property.postalCode }})
+                            </p>
+                            <p class="text-primary font-weight-bold h4">
+                                {{ property.formattedPrice }}
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-        {% endfor %}
-
+            {% endfor %}
+        </div>
+    
     </div>
 {% endblock %}
