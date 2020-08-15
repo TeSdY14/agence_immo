@@ -16,11 +16,17 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Property
 {
 
+    /**
+     *
+     */
     const HEAT = [
         0 => 'Electric',
         1 => 'Gas'
     ];
 
+    /**
+     *
+     */
     const STATUS = [
         0 => 'For Sale',
         1 => 'For Rent',
@@ -107,6 +113,9 @@ class Property
      */
     private $createdAt;
 
+    /**
+     * Property constructor.
+     */
     public function __construct()
     {
         $this->createdAt = new DateTime();
@@ -139,6 +148,9 @@ class Property
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getSlugTitle() {
         return (new Slugify())->slugify($this->title);
     }
@@ -155,18 +167,25 @@ class Property
      * @param string|null $description
      * @return $this
      */
-    public function setDescription(?string $description): self
+    public function setDescription( $description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getSurface(): ?int
     {
         return $this->surface;
     }
 
+    /**
+     * @param int $surface
+     * @return $this
+     */
     public function setSurface(int $surface): self
     {
         $this->surface = $surface;
@@ -174,11 +193,18 @@ class Property
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getRooms(): ?int
     {
         return $this->rooms;
     }
 
+    /**
+     * @param int $rooms
+     * @return $this
+     */
     public function setRooms(int $rooms): self
     {
         $this->rooms = $rooms;
@@ -186,11 +212,18 @@ class Property
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getBedrooms(): ?int
     {
         return $this->bedrooms;
     }
 
+    /**
+     * @param int $bedrooms
+     * @return $this
+     */
     public function setBedrooms(int $bedrooms): self
     {
         $this->bedrooms = $bedrooms;
@@ -198,11 +231,18 @@ class Property
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getFloor(): ?int
     {
         return $this->floor;
     }
 
+    /**
+     * @param int $floor
+     * @return $this
+     */
     public function setFloor(int $floor): self
     {
         $this->floor = $floor;
@@ -210,11 +250,18 @@ class Property
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getPrice(): ?int
     {
         return $this->price;
     }
 
+    /**
+     * @param int $price
+     * @return $this
+     */
     public function setPrice(int $price): self
     {
         $this->price = $price;
@@ -230,11 +277,18 @@ class Property
         return number_format($this->price, 0, '', ' ') . ' €';
     }
 
+    /**
+     * @return int|null
+     */
     public function getHeat(): ?int
     {
         return $this->heat;
     }
 
+    /**
+     * @param int $heat
+     * @return $this
+     */
     public function setHeat(int $heat): self
     {
         $this->heat = $heat;
@@ -250,11 +304,18 @@ class Property
         return self::HEAT[$this->heat];
     }
 
+    /**
+     * @return string|null
+     */
     public function getCity(): ?string
     {
         return $this->city;
     }
 
+    /**
+     * @param string $city
+     * @return $this
+     */
     public function setCity(string $city): self
     {
         $this->city = $city;
@@ -262,11 +323,18 @@ class Property
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getAddress(): ?string
     {
         return $this->address;
     }
 
+    /**
+     * @param string $address
+     * @return $this
+     */
     public function setAddress(string $address): self
     {
         $this->address = $address;
@@ -274,11 +342,18 @@ class Property
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPostalCode(): ?string
     {
         return $this->postalCode;
     }
 
+    /**
+     * @param string $postalCode
+     * @return $this
+     */
     public function setPostalCode(string $postalCode): self
     {
         $this->postalCode = $postalCode;
@@ -286,11 +361,18 @@ class Property
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getSold(): ?bool
     {
         return $this->sold;
     }
 
+    /**
+     * @param bool $sold
+     * @return $this
+     */
     public function setSold(bool $sold): self
     {
         $this->sold = $sold;
@@ -298,11 +380,18 @@ class Property
         return $this;
     }
 
+    /**
+     * @return DateTime|null
+     */
     public function getCreatedAt(): ?DateTime
     {
         return $this->createdAt;
     }
 
+    /**
+     * @param DateTime $createdAt
+     * @return $this
+     */
     public function setCreatedAt(DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
@@ -320,9 +409,12 @@ class Property
 
     /**
      * @param mixed $status
+     * @return Property
      */
-    public function setStatus($status): void
+    public function setStatus($status): self
     {
         $this->status = $status;
+
+        return $this;
     }
 }
