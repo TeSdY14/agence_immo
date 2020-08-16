@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Option;
 use App\Entity\Property;
 use App\Entity\PropertySearch;
 use App\Form\PropertySearchFormType;
@@ -43,13 +44,16 @@ class PropertyController extends AbstractController
      */
     public function index(Request $request, PaginatorInterface $paginator): Response
     {
+
+        $options = $this->em->getRepository(Option::class)->find(1);
+
         // Créer une entité qui représente notre recherche
         $search = new PropertySearch();
         // Créer un formulaire de recherche
         $form = $this->createForm(PropertySearchFormType::class, $search);
         // Gérer le traitement
         $form->handleRequest($request);
-        if (!$form->isValid()) $search = new PropertySearch();
+        if ($form->isSubmitted() && !$form->isValid()) $search = new PropertySearch();
 
         $properties = $paginator->paginate(
             $this->pRepository->findAllFreeQuery($search),

@@ -3,7 +3,7 @@
 
 {% block body %}
     <div class="container text-center">
-        {% for label, messages in app.flashes %}
+        {% for label, messages in app.session.flashBag.all() %}
             {% for message in messages %}
                 <div class="absoluteCenter">
                     <div class="alert alert-{{ label }} flash" role="alert">

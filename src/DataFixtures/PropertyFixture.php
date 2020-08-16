@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Option;
 use App\Entity\Property;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -11,6 +12,7 @@ class PropertyFixture extends Fixture
 {
     public function load(ObjectManager $manager)
     {
+
         $faker = Factory::create('fr_FR');
         for ($i = 0; $i < 100; $i++) {
             $property = new Property();

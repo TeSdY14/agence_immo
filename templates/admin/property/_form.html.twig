@@ -6,10 +6,11 @@
 	<div class="col-md-4">{{ form_row(form.price) }}</div>
 </div>
 <div class="row">
-	<div class="col-md-3">{{ form_row(form.rooms) }}</div>
-	<div class="col-md-3">{{ form_row(form.bedrooms) }}</div>
+	<div class="col-md-2">{{ form_row(form.rooms) }}</div>
+	<div class="col-md-2">{{ form_row(form.bedrooms) }}</div>
+	<div class="col-md-2">{{ form_row(form.floor) }}</div>
 	<div class="col-md-3">{{ form_row(form.heat) }}</div>
-	<div class="col-md-3">{{ form_row(form.floor) }}</div>
+	<div class="col-md-3">{{ form_row(form.options) }}</div>
 </div>
 <div class="row">
 	<div class="col-md-4">{{ form_row(form.address) }}</div>
@@ -17,6 +18,6 @@
 	<div class="col-md-2">{{ form_row(form.postalCode) }}</div>
 	<div class="col-md-2">{{ form_row(form.status) }}</div>
 </div>
-{{ form_widget(form) }}
+{{ form_rest(form) }}
 <button class="btn btn-primary">{{ button|default('Enregistrer') }}</button>
 {{ form_end(form) }}

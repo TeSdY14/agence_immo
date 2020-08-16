@@ -114,7 +114,7 @@ class AdminPropertyController extends AbstractController
         if($this->isCsrfTokenValid('delete' . $property->getId(), $request->get('_token'))) {
             $this->em->remove($property);
             $this->em->flush();
-            $this->addFlash('success', 'Suppression de l\'annonce effectué.');
+            $this->addFlash('warning', 'Suppression de l\'annonce effectué.');
         } else {
             $this->addFlash('danger', 'Jeton CSRF invalide.');
         }

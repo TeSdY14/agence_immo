@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edition d'option{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="d-flex">
+            <div class="mr-auto p-2 h1">Edition d'option</div>
+            <div class="p-2">
+                <a href="{{ path('admin.option.index') }}" class="btn btn-info p-2">Retour à la liste</a>
+            </div>
+        </div>
+        {{ include('admin/option/_form.html.twig', {'button_label': 'Modifier'}) }}
+    </div>
+{% endblock %}
