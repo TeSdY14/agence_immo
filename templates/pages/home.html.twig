@@ -14,8 +14,13 @@
         <h2>Les dernières annonces</h2>
         <div class="row">
             {% for property in properties %}
-                <div class="col-3">
-                    <div class="card">
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        {% if property.imageName %}
+                            <img src="{{ vich_uploader_asset(property, 'imageFile') | imagine_filter('my_thumb') }}" class="card-img-top" alt="{{ property.imageName }}" style="width: 100%; height: auto">
+                        {% else %}
+                            <img src="{{ asset('images/properties/emptyImage.jpg') | imagine_filter('my_thumb') }}" class="card-img-top" alt="{{ property.imageName }}" style="width: 100%; height: auto">
+                        {% endif %}
                         <div class="card-body">
                             <h5 class="card-title">
                                 <a href="{{ path('property.show', {id: property.id, slug: property.slugTitle}) }}">{{ property.title }}</a>

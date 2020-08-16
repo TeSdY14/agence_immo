@@ -6,7 +6,13 @@
         
         <div class="row">
             <div class="col-md-8">
-            
+                {% if property.imageName %}
+                    <img src="{{ vich_uploader_asset(property, 'imageFile') | imagine_filter('my_normal') }}"
+                         class="mx-auto d-block" alt="{{ property.imageName }}" style="width: 800px; height: auto">
+                {% else %}
+                    <img src="{{ asset('images/properties/emptyImage.jpg') | imagine_filter('my_normal') }}"
+                         class="mx-auto d-block" alt="pas d'image" style="width: 800px; height: auto">
+                {% endif %}
             </div>
             <div class="col-md-4">
                 <h1>{{ property.title }}</h1>
@@ -40,7 +46,7 @@
                     </tr>
                     <tr>
                         <td>Chauffage</td>
-                        <td>{{ property.heatType }}</td>
+                        <td>{{ property.heatType|trans }}</td>
                     </tr>
                 </table>
             </div>
@@ -48,12 +54,20 @@
                 <h2>Spécificités</h2>
                 <table class="table table-striped">
                     <tr>
-                        <td></td>
-                        <td></td>
+                        <td colspan="{{ property.options.count}}">Options : </td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td></td>
+                        {% for option in property.options %}
+                            <td>{{ option.name }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <td>Surface</td>
+                        <td>{{ property.surface }} m²</td>
+                    </tr>
+                    <tr>
+                        <td>Ville</td>
+                        <td>{{ property.city }}</td>
                     </tr>
                 </table>
             </div>

@@ -3,3 +3,6 @@
 #    controller: App\Controller\DefaultController::index
 logout:
   path: /logout
+
+_liip_imagine:
+  resource: "@LiipImagineBundle/Resources/config/routing.yaml"

@@ -15,12 +15,13 @@
     </div>
     <div class="container mt-4">
         <h1>Gérer les biens</h1>
-
+        
         <table class="table table-striped">
             <thead>
             <tr>
                 <th>Titre</th>
                 <th>Actions</th>
+                <th>Image</th>
             </tr>
             </thead>
             <tbody>
@@ -37,6 +38,15 @@
                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ property.id) }}">
                             <button class="btn btn-danger">Supprimer</button>
                         </form>
+                    </td>
+                    <td>
+                        {% if property.imageName %}
+                            <img src="{{ vich_uploader_asset(property, 'imageFile') | imagine_filter('smallest') }}"
+                                 class="img-thumbnail" alt="{{ property.imageName }}" style="width: 72px; height: auto">
+                        {% else %}
+                            <img src="{{ asset('images/properties/emptyImage.jpg') | imagine_filter('smallest') }}"
+                                 class="img-thumbnail" alt="pas d'image" style="width: 72px; height: auto">
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}

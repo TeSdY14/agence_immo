@@ -18,6 +18,15 @@
 	<div class="col-md-2">{{ form_row(form.postalCode) }}</div>
 	<div class="col-md-2">{{ form_row(form.status) }}</div>
 </div>
+<div class="row">
+	<div class="col-md-8">{{ form_row(form.description) }}</div>
+	<div class="col-md-4">{{ form_row(form.imageFile) }}</div>
+</div>
 {{ form_rest(form) }}
 <button class="btn btn-primary">{{ button|default('Enregistrer') }}</button>
 {{ form_end(form) }}
+
+{% if property.imageSize > 0 %}
+	<img src="{{ vich_uploader_asset(property, 'imageFile') | imagine_filter('my_normal') }}"
+	     class="rounded float-right rounded" alt="{{ property.imageName }}" style="width: 800px; height: auto">
+{% endif %}

@@ -11,6 +11,7 @@
         "doctrine/annotations": "^1.10",
         "fzaninotto/faker": "^1.9",
         "knplabs/knp-paginator-bundle": "^4.1",
+        "liip/imagine-bundle": "^2.3",
         "sensio/framework-extra-bundle": "^5.5",
         "symfony/asset": "*",
         "symfony/console": "4.4.*",
@@ -30,7 +31,8 @@
         "symfony/validator": "4.4.*",
         "symfony/web-link": "*",
         "symfony/web-profiler-bundle": "4.4.*",
-        "symfony/yaml": "*"
+        "symfony/yaml": "*",
+        "vich/uploader-bundle": "^1.8"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",
